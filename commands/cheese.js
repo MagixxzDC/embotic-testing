@@ -21,8 +21,10 @@ module.exports = {
 
         // Stop the interval after 20 minutes to prevent spamming
         setTimeout(() => {
-            clearInterval(message.client.cheeseInterval);
-            message.client.cheeseInterval = null;
+            if (message.client.cheeseInterval) {
+                clearInterval(message.client.cheeseInterval);
+                message.client.cheeseInterval = null;
+            }
         }, 1200000);
     },
 };
