@@ -10,7 +10,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('User Information :person:')
+            .setTitle('User Information :personembotic:')
             .setDescription(`This is all the information available on ${user.tag}`)
             .setThumbnail(user.displayAvatarURL({ dynamic: true }))
             .addFields(
