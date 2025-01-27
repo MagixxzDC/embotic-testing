@@ -34,7 +34,7 @@ module.exports = {
 
         const staffEmbed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('Staff Members')
+            .setTitle('Staff Members :gear:')
             .setDescription(staffMembers.join('\n'))
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
             .setTimestamp();
