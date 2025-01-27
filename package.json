@@ -1,9 +1,9 @@
 {
-  "name": "embotic-testing",
+  "name": "embotic",
   "version": "1.0.0",
   "main": "Main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Log: Test Completed\" && exit 1",
     "start": "node Main.js"
   },
   "repository": {
