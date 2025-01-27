@@ -15,7 +15,8 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                msg.delete();
+                setTimeout(() => msg.delete(), 0);
+                setTimeout(() => message.delete(), 0);
             });
         }
 
