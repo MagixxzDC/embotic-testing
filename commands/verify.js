@@ -43,7 +43,7 @@ module.exports = {
                 const logEmbed = new EmbedBuilder()
                     .setColor('#141414')
                     .setTitle(`${message.author.tag} was verified!`)
-                    .setDescription(`Verified in: #${message.channel.name}\nWhen: ${new Date().toLocaleString()}`)
+                    .setDescription(`Verified in: #<${message.channel.id}>\nWhen: ${new Date().toLocaleString()}`)
                     .setFooter({ text: 'Embotic • Magixxz#3038', iconURL: message.guild.iconURL() })
                     .setTimestamp();
 
