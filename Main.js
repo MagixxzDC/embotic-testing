@@ -23,7 +23,7 @@ client.once('ready', async () => {
     const channelId = '838514683253620787';
 
     const updateChannelName = async () => {
-        const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | hh:mm:ss A');
+        const newChannelName = moment().tz('America/New_York').format('🕒 | hh:mm:ss A');
         try {
             const channel = await client.channels.fetch(channelId);
             if (channel && channel.isVoiceBased()) {
