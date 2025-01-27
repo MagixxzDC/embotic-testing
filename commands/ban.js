@@ -23,7 +23,7 @@ module.exports = {
             await member.ban();
             const embed = new EmbedBuilder()
                 .setColor('#141414')
-                .setTitle('User Banned')
+                .setTitle('User Banned :hammer:')
                 .setDescription(`**${user.tag}** has been banned by **${message.author.tag}**`)
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
