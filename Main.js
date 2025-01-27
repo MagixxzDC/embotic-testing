@@ -1,41 +1,21 @@
 require('dotenv').config();
 const fs = require('fs');
-const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const moment = require('moment-timezone');
-
+const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const moment = require('moment-timezone');
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-const commands = [];
-
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
-    if (command.data && command.data.name) {
-        client.commands.set(command.data.name, command);
-        commands.push(command.data.toJSON());
-    } else {
-        console.warn(`Command file ${file} is missing a valid command structure.`);
+    client.commands.set(command.name, command);
+    if (command.aliases) {
+        command.aliases.forEach(alias => {
+            client.commands.set(alias, command);
+        });
     }
 }
-
-const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN);
-
-(async () => {
-    try {
-        console.log('Started refreshing application (/) commands.');
-
-        await rest.put(
-            Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
-            { body: commands },
-        );
-
-        console.log('Successfully reloaded application (/) commands.');
-    } catch (error) {
-        console.error(error);
-    }
-})();
 
 client.once('ready', async () => {
     console.log('Bot is online!');
@@ -50,7 +30,7 @@ client.once('ready', async () => {
                 await channel.setName(newChannelName);
                 console.log(`Channel name changed to ${newChannelName}`);
             } else {
-                console.log('Channel not found or is not a voice channel.');
+                console.log('Channel not found or is not a text channel.');
             }
         } catch (error) {
             console.error('Error changing channel name:', error);
@@ -59,20 +39,24 @@ client.once('ready', async () => {
     
     updateChannelName();
     setInterval(updateChannelName, 60000);  
+   
 });
 
-client.on('interactionCreate', async interaction => {
-    if (!interaction.isCommand()) return;
+client.on('messageCreate', message => {
+    if (!message.content.startsWith('-') || message.author.bot) return;
 
-    const command = client.commands.get(interaction.commandName);
+    const args = message.content.slice(1).split(/ +/);
+    const commandName = args.shift().toLowerCase();
+
+    const command = client.commands.get(commandName);
 
     if (!command) return;
 
     try {
-        await command.execute(interaction, client);
+        command.execute(message, args);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+        message.reply('There was an error trying to execute that command!');
     }
 });
 

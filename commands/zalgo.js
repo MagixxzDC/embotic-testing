@@ -21,26 +21,13 @@ module.exports = {
 };
 
 function toZalgo(text) {
-    const zalgoChars = {
-        up: [
-            '̍', '̎', '̄', '̅', '̿', '̑', '̆', '̐', '͒', '͗', '͑', '̇', '̈', '̊', '͂', '̓', '̈', '͊', '͋', '͌', '̃', '̂', '̌', '͐', '̀', '́', '̋', '̏', '̒', '̓', '̔', '̽', '̉', 'ͣ', 'ͤ', 'ͥ', 'ͦ', 'ͧ', 'ͨ', 'ͩ', 'ͪ', 'ͫ', 'ͬ', 'ͭ', 'ͮ', 'ͯ', '̾', '͛', '͆', '̚',
-        ],
-        down: [
-            '̖', '̗', '̘', '̙', '̜', '̝', '̞', '̟', '̠', '̤', '̥', '̦', '̩', '̪', '̫', '̬', '̭', '̮', '̯', '̰', '̱', '̲', '̳', '̹', '̺', '̻', '̼', 'ͅ', '͇', '͈', '͉', '͍', '͎', '͓', '͔', '͕', '͖', '͙', '͚', '̣',
-        ],
-        mid: [
-            '̕', '̛', '̀', '́', '͘', '̡', '̢', '̧', '̨', '̴', '̵', '̶', '͜', '͝', '͞', '͟', '͠', '͢', '̸', '̷', '͡', ' ҉',
-        ],
-    };
+    const zalgoChars = '̴̵̶̸̷̡̢̧̨̛̖̗̘̙̜̝̞̟̠̤̥̦̩̪̫̬̭̮̯̰̱̲̳̹̺̻̼͇͈͉͍͎͓͔͕͖͙͚̣̍̎̄̅̿̑̆̐͒͗͑̇̈̊͂̓̈͊͋͌̃̂̌͐̀́̋̏̒̓̔̽̉ͣͤͥͦͧͨͩͪͫͬͭͮͯ̾͛͆̀́̚̕͘͜͟͢͝͞͠͡ͅ҉';
 
     return text.split('').map(char => {
         if (char === ' ') return char;
         let newChar = char;
-        for (let i = 0; i < 15; i++) {
-            const rand = Math.floor(Math.random() * 3);
-            if (rand === 0) newChar += zalgoChars.up[Math.floor(Math.random() * zalgoChars.up.length)];
-            if (rand === 1) newChar += zalgoChars.down[Math.floor(Math.random() * zalgoChars.down.length)];
-            if (rand === 2) newChar += zalgoChars.mid[Math.floor(Math.random() * zalgoChars.mid.length)];
+        for (let i = 0; i < 5; i++) {
+            newChar += zalgoChars[Math.floor(Math.random() * zalgoChars.length)];
         }
         return newChar;
     }).join('');
