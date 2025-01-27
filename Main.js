@@ -2,6 +2,7 @@ require('dotenv').config();
 const fs = require('fs');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const moment = require('moment-timezone');
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -16,8 +17,23 @@ for (const file of commandFiles) {
     }
 }
 
-client.once('ready', () => {
+client.once('ready', async () => {
     console.log('Bot is online!');
+
+    const channelId = '838514683253620787';
+    const newChannelName = moment().tz('America/New_York').format('YYYY-MM-DD HH:mm:ss');
+
+    try {
+        const channel = await client.channels.fetch(channelId);
+        if (channel && channel.isText()) {
+            await channel.setName(newChannelName);
+            console.log(`Channel name changed to ${newChannelName}`);
+        } else {
+            console.log('Channel not found or is not a text channel.');
+        }
+    } catch (error) {
+        console.error('Error changing channel name:', error);
+    }
 });
 
 client.on('messageCreate', message => {

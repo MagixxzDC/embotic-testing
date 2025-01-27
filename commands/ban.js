@@ -11,7 +11,7 @@ module.exports = {
 
         const user = message.mentions.users.first();
         if (!user) {
-            return message.reply('Please mention a user to ban.');
+            return message.reply('Please mention a valid user to ban.');
         }
 
         const member = message.guild.members.cache.get(user.id);
