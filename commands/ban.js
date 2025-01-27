@@ -2,7 +2,6 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'ban',
-    aliases: ['b', 'banhammer', 'hammer', 'yeet', 'begone', 'banish', 'banishthou'],
     description: 'Ban a user',
     async execute(message, args) {
         if (!message.member.permissions.has('BAN_MEMBERS')) {
@@ -22,9 +21,9 @@ module.exports = {
         try {
             await member.ban();
             const embed = new MessageEmbed()
-                .setTitle(`User ${message.aliases}`)
+                .setTitle('User Banned')
                 .setDescription(`**${user.tag}** has been banned by **${message.author.tag}**`)
-                .setColor('#141414')
+                .setColor('#ff0000')
                 .setFooter('embotic', message.guild.iconURL())
                 .setTimestamp();
 
