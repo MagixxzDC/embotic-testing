@@ -1,4 +1,4 @@
-const { MessageEmbed } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'ban',
@@ -21,11 +21,11 @@ module.exports = {
 
         try {
             await member.ban();
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setTitle('User Banned')
                 .setDescription(`**${user.tag}** has been banned by **${message.author.tag}**`)
-                .setColor('#ff0000')
-                .setFooter('embotic', message.guild.iconURL())
+                .setColor('#141414')
+                .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
 
             message.channel.send({ embeds: [embed] });
