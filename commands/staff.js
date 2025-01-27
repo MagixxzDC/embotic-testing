@@ -15,7 +15,7 @@ module.exports = {
             return message.reply({ embeds: [errorEmbed] });
         }
 
-        const staffRoles = ['Bot Owner', 'Administrator', 'Moderator']; // Add your staff roles here
+        const staffRoles = ['__Bot Owner__', '__Administrator__', '__Moderator__']; // Add your staff roles here
         let staffMembers = [];
 
         staffRoles.forEach(roleName => {
