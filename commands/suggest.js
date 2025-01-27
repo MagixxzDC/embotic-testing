@@ -51,7 +51,6 @@ module.exports = {
             const replyMessage = await message.reply('Thank you for your suggestion!');
             
             message.delete().catch(console.error);
-            botMessage.delete().catch(console.error);
             replyMessage.delete().catch(console.error);
         } catch (error) {
             console.error(error);
