@@ -25,7 +25,7 @@ client.once('ready', async () => {
 
     try {
         const channel = await client.channels.fetch(channelId);
-        if (channel && channel.isText()) {
+        if (channel && channel.isTextBased()) {
             await channel.setName(newChannelName);
             console.log(`Channel name changed to ${newChannelName}`);
         } else {
