@@ -1,5 +1,6 @@
 module.exports = {
     name: 'purge',
+    aliases: ['p', 'clear', 'c', 'delete', 'd'],
     description: 'Deletes a specified number of messages from the channel.',
     async execute(message, args) {
       if (!message.member.permissions.has('MANAGE_MESSAGES')) {
