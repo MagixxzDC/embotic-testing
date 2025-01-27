@@ -65,8 +65,8 @@ module.exports = {
             const botMessage = await suggestionSubmissionChannel.send({ embeds: [embed] });
             const replyMessage = await message.reply('Thank you for your suggestion!');
             
-            message.delete().catch(console.error);
-            replyMessage.delete().catch(console.error);
+            setTimeout(() => message.delete().catch(console.error), 5000);
+            setTimeout(() => replyMessage.delete().catch(console.error), 5000);
         } catch (error) {
             console.error(error);
             const errorEmbed = new EmbedBuilder()
