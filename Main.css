@@ -1,0 +1,40 @@
+.serial {
+    width: 600px;
+    padding: 17px;
+    background-color: #292929;
+    margin: 40px auto 0;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    height: 66.5px;
+  }
+  .generate {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    background-color: #292929;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+  }
+  .generate:hover {
+    background-color: #383838;
+  }
+  .discord {
+    display: block;
+    width: fit-content;
+    margin: 20px auto;
+    background-color: #292929;
+    color: white;
+    padding: 13px 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    user-select: none;
+  }
