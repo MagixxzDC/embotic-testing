@@ -39,6 +39,7 @@ client.once('ready', async () => {
 
     updateChannelName();
     setInterval(updateChannelName, 60000);
+    console.log('Channel name update interval.');
 });
 
 client.on('messageCreate', message => {
