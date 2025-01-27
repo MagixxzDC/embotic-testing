@@ -38,7 +38,7 @@ module.exports = {
             });
 
             // Log embed
-            const logChannel = message.guild.channels.cache.find(channel => channel.name === 'log-channel');
+            const logChannel = message.guild.channels.cache.find(channel => channel.name === 'logs');
             if (logChannel) {
                 const logEmbed = new EmbedBuilder()
                     .setColor('#141414')
