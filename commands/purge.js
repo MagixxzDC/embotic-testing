@@ -15,7 +15,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('Purge :https://discordapp.com/assets/7cfbf5197ce035b63194.svg:')
+            .setTitle('Purge 👹')
             .setDescription('How many messages do you want to delete?');
 
         message.channel.send({ embeds: [embed] }).then(() => {
