@@ -1,8 +1,9 @@
 require('dotenv').config();
 const fs = require('fs');
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 const moment = require('moment-timezone');
+
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
 client.commands = new Collection();
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
@@ -11,8 +12,12 @@ const commands = [];
 
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
-    client.commands.set(command.data.name, command);
-    commands.push(command.data.toJSON());
+    if (command.data && command.data.name) {
+        client.commands.set(command.data.name, command);
+        commands.push(command.data.toJSON());
+    } else {
+        console.warn(`Command file ${file} is missing a valid command structure.`);
+    }
 }
 
 const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN);
@@ -45,7 +50,7 @@ client.once('ready', async () => {
                 await channel.setName(newChannelName);
                 console.log(`Channel name changed to ${newChannelName}`);
             } else {
-                console.log('Channel not found or is not a text channel.');
+                console.log('Channel not found or is not a voice channel.');
             }
         } catch (error) {
             console.error('Error changing channel name:', error);
