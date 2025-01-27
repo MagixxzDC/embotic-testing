@@ -14,10 +14,7 @@ module.exports = {
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
 
-            return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                setTimeout(() => msg.delete(), 0);
-                setTimeout(() => message.delete(), 0);
-            });
+            return message.reply({ embeds: [errorEmbed] });
         }
 
         const zalgoText = toZalgo(text);
