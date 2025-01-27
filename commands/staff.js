@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
         if (!message.member.permissions.has('MANAGE_GUILD')) {
             const errorEmbed = new EmbedBuilder()
-                .setColor('#FF0000')
+                .setColor('#141414')
                 .setTitle('Error')
                 .setDescription('You do not have permission to use this command.')
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
@@ -21,8 +21,9 @@ module.exports = {
         staffRoles.forEach(roleName => {
             const role = message.guild.roles.cache.find(r => r.name === roleName);
             if (role) {
+                staffMembers.push(`**${roleName}**`); // Add header for each role
                 role.members.forEach(member => {
-                    staffMembers.push(`${member.user.tag} (${roleName})`);
+                    staffMembers.push(`${member.user.tag}`);
                 });
             }
         });
