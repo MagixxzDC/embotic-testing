@@ -1,17 +1,14 @@
-const { CommandInteraction, Client, ApplicationCommandType } = require('discord.js');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { CommandInteraction, Client } = require('discord.js');
 
 module.exports = {
-    name: 'zalgo',
-    description: 'Converts your text into Zalgo text.',
-    type: ApplicationCommandType.ChatInput,
-    options: [
-        {
-            name: 'text',
-            description: 'The text to convert to Zalgo.',
-            type: 3, // STRING type
-            required: true,
-        },
-    ],
+    data: new SlashCommandBuilder()
+        .setName('zalgo')
+        .setDescription('Converts your text into Zalgo text.')
+        .addStringOption(option => 
+            option.setName('text')
+                .setDescription('The text to convert to Zalgo.')
+                .setRequired(true)),
     /**
      * @param {CommandInteraction} interaction
      * @param {Client} client
