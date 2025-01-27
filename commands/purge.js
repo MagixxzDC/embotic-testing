@@ -38,7 +38,9 @@ module.exports = {
             .setTitle('Purge 👹')
             .setDescription('There was an error trying to purge messages in this channel!');
 
-        message.channel.send({ embeds: [embed] }).then(() => {
+        message.channel.send({ embeds: [embed] }).then(sentMessage => {
+            setTimeout(() => sentMessage.delete(), 60000);
+
             message.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
                 .then(collected => {
                     const response = collected.first();
