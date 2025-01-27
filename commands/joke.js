@@ -20,11 +20,17 @@ module.exports = {
                 .setDescription(data.joke)
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
+            const errorembed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Unexpected Error')
+                .setDescription("There was an unexpected error while trying to fetch a joke.")  
+                .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+                .setTimestamp();
 
             message.channel.send({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            message.reply('There was an error trying to fetch a joke.');
+            message.reply({ embeds: [errorembed] });
         }
     },
 };

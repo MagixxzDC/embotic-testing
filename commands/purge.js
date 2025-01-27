@@ -16,27 +16,37 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('How many messages do you want to delete?');
+            .setDescription('How many messages do you want to delete?')
+            .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+            .setTimestamp();
 
         const embedTimeout = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('You did not input a number in time.');
+            .setDescription('You did not input a number in time.')
+            .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+            .setTimestamp();
 
         const embedInvalidNumber = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('Please enter a valid number.');
+            .setDescription('Please enter a valid number.')
+            .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+            .setTimestamp();
 
         const embedOutOfRange = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('You need to input a number between 1 and 100.');
+            .setDescription('You need to input a number between 1 and 100.')
+            .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+            .setTimestamp();
 
         const embedError = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('There was an error trying to purge messages in this channel!');
+            .setDescription('There was an error trying to purge messages in this channel!')
+            .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+            .setTimestamp();
 
         message.channel.send({ embeds: [embed] }).then(sentMessage => {
             setTimeout(() => sentMessage.delete(), 60000);

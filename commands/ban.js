@@ -11,7 +11,7 @@ module.exports = {
 
         const user = message.mentions.users.first();
         if (!user) {
-            return message.reply('Please mention a valid user to ban.');
+            return message.reply('Please mention a user to ban.');
         }
 
         const member = message.guild.members.cache.get(user.id);
@@ -22,16 +22,22 @@ module.exports = {
         try {
             await member.ban();
             const embed = new EmbedBuilder()
+                .setColor('#141414')
                 .setTitle('User Banned')
                 .setDescription(`**${user.tag}** has been banned by **${message.author.tag}**`)
-                .setColor('#141414')
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
 
             message.channel.send({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            message.reply('There was an error trying to ban this user.');
+            const errorembed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Error')
+                .setDescription('There was an error trying to ban this user.')
+                .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+                .setTimestamp();
+            message.channel.send({ embeds: [errorembed] });
         }
     },
 };
