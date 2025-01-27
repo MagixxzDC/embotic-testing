@@ -4,6 +4,6 @@ module.exports = {
     description: 'Ping command',
     execute(message, args) {
         const latency = Date.now() - message.createdTimestamp;
-        message.channel.send(`Pong! Latency is ${latency}ms.`);
+        message.channel.send(`Pong! Latency: ${latency}ms.`);
     },
 };
