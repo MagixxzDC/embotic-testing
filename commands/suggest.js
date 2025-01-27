@@ -19,7 +19,7 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                msg.delete();
+                setTimeout(() => msg.delete(), 5000);
             });
         }
 
@@ -32,7 +32,7 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                msg.delete();
+                setTimeout(() => msg.delete(), 5000);
             });
         }
 
@@ -46,7 +46,7 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                msg.delete();
+                setTimeout(() => msg.delete(), 5000);
             });
         }
 
@@ -77,7 +77,7 @@ module.exports = {
                 .setTimestamp();
 
             message.reply({ embeds: [errorEmbed] }).then(msg => {
-                msg.delete();
+                setTimeout(() => msg.delete(), 5000);
             });
         }
     },
