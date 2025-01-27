@@ -36,9 +36,10 @@ client.once('ready', async () => {
             console.error('Error changing channel name:', error);
         }
     };
-
-    setInterval(updateChannelName, 60000);  
+    
     updateChannelName();
+    setInterval(updateChannelName, 60000);  
+   
 });
 
 client.on('messageCreate', message => {
