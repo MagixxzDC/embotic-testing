@@ -15,13 +15,13 @@ module.exports = {
             return message.reply({ embeds: [errorEmbed] });
         }
 
-        const staffRoles = ['__Bot Owner__', '__Administrator__', '__Moderator__']; // Add your staff roles here
+        const staffRoles = ['Bot Owner', 'Administrator', 'Moderator']; // Add your staff roles here
         let staffMembers = [];
 
         staffRoles.forEach(roleName => {
             const role = message.guild.roles.cache.find(r => r.name === roleName);
             if (role) {
-                staffMembers.push(`**${roleName}**`); // Add header for each role
+                staffMembers.push(`**__${roleName}__**`); // Add header for each role
                 role.members.forEach(member => {
                     staffMembers.push(`${member.user.tag}`);
                 });
