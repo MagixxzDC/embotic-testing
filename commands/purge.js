@@ -17,18 +17,26 @@ module.exports = {
             .setColor('#141414')
             .setTitle('Purge 👹')
             .setDescription('How many messages do you want to delete?');
-            const embed2 = new EmbedBuilder()
+
+        const embedTimeout = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
             .setDescription('You did not input a number in time.');
-            const embed3 = new EmbedBuilder()
+
+        const embedInvalidNumber = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
-            .setDescription('There was an error trying to purge messages in this channel!');
-            const embed4 = new EmbedBuilder()
+            .setDescription('Please enter a valid number.');
+
+        const embedOutOfRange = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Purge 👹')
             .setDescription('You need to input a number between 1 and 100.');
+
+        const embedError = new EmbedBuilder()
+            .setColor('#141414')
+            .setTitle('Purge 👹')
+            .setDescription('There was an error trying to purge messages in this channel!');
 
         message.channel.send({ embeds: [embed] }).then(() => {
             message.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
@@ -37,18 +45,18 @@ module.exports = {
                     const amount = parseInt(response.content);
 
                     if (isNaN(amount)) {
-                        return message.reply(embed4);
+                        return message.channel.send({ embeds: [embedInvalidNumber] });
                     } else if (amount < 1 || amount > 100) {
-                        return message.reply(embed4);
+                        return message.channel.send({ embeds: [embedOutOfRange] });
                     }
 
                     message.channel.bulkDelete(amount, true).catch(err => {
                         console.error(err);
-                        message.channel.send(embed3);
+                        message.channel.send({ embeds: [embedError] });
                     });
                 })
                 .catch(() => {
-                    message.channel.send(embed2);
+                    message.channel.send({ embeds: [embedTimeout] });
                 });
         });
     },
