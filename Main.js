@@ -26,7 +26,7 @@ client.once('ready', async () => {
         const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | hh:mm:ss A');
         try {
             const channel = await client.channels.fetch(channelId);
-            if (channel && channel.isTextBased()) {
+            if (channel) {
                 await channel.setName(newChannelName);
                 console.log(`Channel name changed to ${newChannelName}`);
             } else {
