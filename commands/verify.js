@@ -4,6 +4,23 @@ module.exports = {
     name: 'verify',
     description: 'Assigns the Bot User role to the user.',
     async execute(message, args) {
+        
+        if (message.channel.name !== 'verify-here') {
+            const errorEmbed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Error')
+                .setDescription('This command can only be used in the verify-here channel.')
+                .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+                .setTimestamp();
+
+            return message.reply({ embeds: [errorEmbed] }).then(msg => {
+                setTimeout(() => {
+                    msg.delete().catch(console.error);
+                    message.delete().catch(console.error);
+                }, 5000);
+            });
+        }
+
         const role = message.guild.roles.cache.find(role => role.name === 'Bot User');
         if (!role) {
             const errorEmbed = new EmbedBuilder()
@@ -43,7 +60,7 @@ module.exports = {
                 const logEmbed = new EmbedBuilder()
                     .setColor('#141414')
                     .setTitle(`${message.author.tag} was verified!`)
-                    .setDescription(`Verified in: <#${message.channel.id}>\nWhen: ${new Date().toLocaleString()}`)
+                    .setDescription(`Verified in: <#803702248856223835>\nWhen: ${new Date().toLocaleString()}`)
                     .setFooter({ text: 'Embotic • Magixxz#3038', iconURL: message.guild.iconURL() })
                     .setTimestamp();
 
