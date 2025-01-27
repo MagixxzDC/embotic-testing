@@ -45,9 +45,13 @@ module.exports = {
                     const amount = parseInt(response.content);
 
                     if (isNaN(amount)) {
-                        return message.channel.send({ embeds: [embedInvalidNumber] });
+                        message.channel.send({ embeds: [embedInvalidNumber] });
+                        return;
                     } else if (amount < 1 || amount > 100) {
-                        return message.channel.send({ embeds: [embedOutOfRange] });
+                        message.channel.send({ embeds: [embedOutOfRange] }).then(sentMessage => {
+                            setTimeout(() => sentMessage.delete(), 60000);
+                        });
+                        return;
                     }
 
                     message.channel.bulkDelete(amount, true).catch(err => {
@@ -56,7 +60,9 @@ module.exports = {
                     });
                 })
                 .catch(() => {
-                    message.channel.send({ embeds: [embedTimeout] });
+                    message.channel.send({ embeds: [embedTimeout] }).then(sentMessage => {
+                        setTimeout(() => sentMessage.delete(), 60000);
+                    });
                 });
         });
     },
