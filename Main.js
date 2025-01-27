@@ -21,7 +21,7 @@ client.once('ready', async () => {
     console.log('Bot is online!');
 
     const channelId = '838514683253620787';
-    const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | HH:mm:ss');
+    const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | hh:mm:ss A');
 
     try {
         const channel = await client.channels.fetch(channelId);
