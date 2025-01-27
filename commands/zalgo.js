@@ -1,22 +1,26 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { CommandInteraction, Client } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('zalgo')
-        .setDescription('Converts your text into Zalgo text.')
-        .addStringOption(option => 
-            option.setName('text')
-                .setDescription('The text to convert to Zalgo.')
-                .setRequired(true)),
-    /**
-     * @param {CommandInteraction} interaction
-     * @param {Client} client
-     */
-    async execute(interaction, client) {
-        const text = interaction.options.getString('text');
+    name: 'zalgo',
+    aliases: ['zalgofy', 'distort'],
+    description: 'Converts your text into Zalgo text.',
+    async execute(message, args) {
+        const text = args.join(' ');
+        if (!text) {
+            const errorEmbed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Error')
+                .setDescription('Please provide a message to convert to Zalgo.')
+                .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
+                .setTimestamp();
+
+            return message.reply({ embeds: [errorEmbed] }).then(msg => {
+                msg.delete();
+            });
+        }
+
         const zalgoText = toZalgo(text);
-        await interaction.reply(zalgoText);
+        message.channel.send(zalgoText);
     },
 };
 
