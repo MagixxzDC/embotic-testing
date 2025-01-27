@@ -20,6 +20,7 @@ module.exports = {
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
                 setTimeout(() => msg.delete(), 5000);
+                setTimeout(() => message.delete(), 5000);
             });
         }
 
@@ -33,6 +34,7 @@ module.exports = {
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
                 setTimeout(() => msg.delete(), 5000);
+                setTimeout(() => message.delete(), 5000);
             });
         }
 
@@ -47,6 +49,7 @@ module.exports = {
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
                 setTimeout(() => msg.delete(), 5000);
+                setTimeout(() => message.delete(), 5000);
             });
         }
 
@@ -78,6 +81,7 @@ module.exports = {
 
             message.reply({ embeds: [errorEmbed] }).then(msg => {
                 setTimeout(() => msg.delete(), 5000);
+                setTimeout(() => message.delete(), 5000);
             });
         }
     },
