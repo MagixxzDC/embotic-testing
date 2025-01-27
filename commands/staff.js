@@ -23,7 +23,7 @@ module.exports = {
             if (role) {
                 staffMembers.push(`**__${roleName}__**`); // Add header for each role
                 role.members.forEach(member => {
-                    staffMembers.push(`${member.user.tag}`);
+                    staffMembers.push(`- ${member.user.tag}`);
                 });
             }
         });
