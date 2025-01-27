@@ -17,7 +17,7 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                setTimeout(() => msg.delete(), 30000);
+                msg.delete();
             });
         }
 
@@ -31,7 +31,7 @@ module.exports = {
                 .setTimestamp();
 
             return message.reply({ embeds: [errorEmbed] }).then(msg => {
-                setTimeout(() => msg.delete(), 30000);
+                msg.delete();
             });
         }
 
@@ -50,11 +50,9 @@ module.exports = {
             const botMessage = await suggestionChannel.send({ embeds: [embed] });
             const replyMessage = await message.reply('Thank you for your suggestion!');
             
-            setTimeout(() => {
-                message.delete().catch(console.error);
-                botMessage.delete().catch(console.error);
-                replyMessage.delete().catch(console.error);
-            }, 30000);
+            message.delete().catch(console.error);
+            botMessage.delete().catch(console.error);
+            replyMessage.delete().catch(console.error);
         } catch (error) {
             console.error(error);
             const errorEmbed = new EmbedBuilder()
@@ -65,7 +63,7 @@ module.exports = {
                 .setTimestamp();
 
             message.reply({ embeds: [errorEmbed] }).then(msg => {
-                setTimeout(() => msg.delete(), 30000);
+                msg.delete();
             });
         }
     },
