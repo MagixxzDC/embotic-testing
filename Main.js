@@ -21,19 +21,24 @@ client.once('ready', async () => {
     console.log('Bot is online!');
 
     const channelId = '838514683253620787';
-    const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | hh:mm:ss A');
 
-    try {
-        const channel = await client.channels.fetch(channelId);
-        if (channel && channel.isTextBased()) {
-            await channel.setName(newChannelName);
-            console.log(`Channel name changed to ${newChannelName}`);
-        } else {
-            console.log('Channel not found or is not a text channel.');
+    const updateChannelName = async () => {
+        const newChannelName = moment().tz('America/New_York').format('🕒 MM-DD-YYYY | hh:mm:ss A');
+        try {
+            const channel = await client.channels.fetch(channelId);
+            if (channel && channel.isTextBased()) {
+                await channel.setName(newChannelName);
+                console.log(`Channel name changed to ${newChannelName}`);
+            } else {
+                console.log('Channel not found or is not a text channel.');
+            }
+        } catch (error) {
+            console.error('Error changing channel name:', error);
         }
-    } catch (error) {
-        console.error('Error changing channel name:', error);
-    }
+    };
+
+    updateChannelName();
+    setInterval(updateChannelName, 60000);
 });
 
 client.on('messageCreate', message => {
