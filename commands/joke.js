@@ -16,7 +16,7 @@ module.exports = {
 
             const embed = new EmbedBuilder()
                 .setColor('#141414')
-                .setTitle('Dad Joke')
+                .setTitle('Dad Joke :man:')
                 .setDescription(data.joke)
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
