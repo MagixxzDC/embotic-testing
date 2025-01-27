@@ -20,8 +20,8 @@ module.exports = {
                 { name: 'Owner ID', value: owner.id, inline: true },
                 { name: 'Created On', value: guild.createdAt.toDateString(), inline: true },
                 { name: 'Days Since Creation', value: `${Math.floor((Date.now() - guild.createdAt) / (1000 * 60 * 60 * 24))}`, inline: true },
-                { name: 'Region', value: guild.region, inline: true },
-                { name: 'Verification Level', value: guild.verificationLevel, inline: true },
+                { name: 'Region', value: guild.region || 'Unknown', inline: true },
+                { name: 'Verification Level', value: guild.verificationLevel.toString(), inline: true },
                 { name: 'Text Channels', value: `${guild.channels.cache.filter(channel => channel.type === 'GUILD_TEXT').size}`, inline: true },
                 { name: 'Voice Channels', value: `${guild.channels.cache.filter(channel => channel.type === 'GUILD_VOICE').size}`, inline: true },
                 { name: 'Roles', value: `${guild.roles.cache.size}`, inline: true }
