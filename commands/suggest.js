@@ -55,7 +55,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('New Suggestion')
+            .setTitle('New Suggestion :exclamation:')
             .setDescription(suggestion)
             .addFields(
                 { name: 'Suggested by', value: message.author.tag, inline: true },
