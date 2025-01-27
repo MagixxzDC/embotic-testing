@@ -9,7 +9,7 @@ module.exports = {
             const errorEmbed = new EmbedBuilder()
                 .setColor('#141414')
                 .setTitle('Error')
-                .setDescription('This command can only be used in the verify-here channel.')
+                .setDescription('This command can only be used in the <#803702248856223835> channel.')
                 .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
                 .setTimestamp();
 
