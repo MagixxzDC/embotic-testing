@@ -2,6 +2,7 @@ const { MessageEmbed } = require('discord.js');
 
 module.exports = {
     name: 'ban',
+    aliases: ['b', 'banhammer', 'hammer', 'banish', 'begone', 'yeet'],
     description: 'Ban a user',
     async execute(message, args) {
         if (!message.member.permissions.has('BAN_MEMBERS')) {
