@@ -15,6 +15,7 @@ for (const file of commandFiles) {
             client.commands.set(alias, command);
         });
     }
+    console.log(`Command loaded: ${command.name}`); // Debugging log
 }
 
 client.once('ready', async () => {
@@ -61,10 +62,15 @@ client.on('messageCreate', message => {
     const args = message.content.slice(1).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
+    console.log(`Command name: ${commandName}`); // Debugging log
     const command = client.commands.get(commandName);
 
-    if (!command) return;
+    if (!command) {
+        console.log('Command not found'); // Debugging log
+        return;
+    }
 
+    console.log(`Executing command: ${commandName}`); // Debugging log
     try {
         command.execute(message, args);
     } catch (error) {
