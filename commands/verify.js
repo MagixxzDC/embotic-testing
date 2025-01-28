@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'verify',
-    description: 'Assigns the Bot User role to the user.',
+    description: 'Verifies the user.',
     async execute(message, args) {
         
         if (message.channel.name !== 'verify-here') {

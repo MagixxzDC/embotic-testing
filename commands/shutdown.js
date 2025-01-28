@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'shutdown',
-    description: 'Shuts down the bot',
+    description: 'Shuts down the bot.',
     execute(message, args) {
         const authorizedUserId = '328248785933434881';
         const channelId = '814759943789215755';
