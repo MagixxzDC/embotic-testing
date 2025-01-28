@@ -24,8 +24,12 @@ module.exports = {
 
             message.channel.send({ embeds: [embed] });
         } catch (error) {
-            console.error('Error fetching lyrics:', error);
-            message.channel.send('There was an error fetching the lyrics.');
+            if (error.response && error.response.status === 404) {
+                message.channel.send('Lyrics not found for the specified song.');
+            } else {
+                console.error('Error fetching lyrics:', error);
+                message.channel.send('There was an error fetching the lyrics.');
+            }
         }
     },
 };
