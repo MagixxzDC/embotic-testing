@@ -31,6 +31,10 @@ module.exports = {
             footer: {
                 text: 'Thank you for your patience.',
             },
+            author: {
+                name: message.author.tag,
+                icon_url: message.author.displayAvatarURL({ dynamic: true }),
+            },
         };
 
         await ticketChannel.send({ embeds: [embed] });
