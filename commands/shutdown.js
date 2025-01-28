@@ -18,8 +18,11 @@ module.exports = {
             .setColor('#141414')
             .setTitle('Shutdown')
             .setDescription('Shutting down...');
-        message.channel.send({ embeds: [embed] }).then(() => {
-            process.exit();
+        message.channel.send({ embeds: [embed] }).then(sentMessage => {
+            setTimeout(() => {
+                sentMessage.delete();
+                process.exit();
+            }, 2000);
         });
     }
 };
