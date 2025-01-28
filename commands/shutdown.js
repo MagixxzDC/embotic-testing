@@ -24,7 +24,7 @@ module.exports = {
                 sentMessage.delete();
                 const channel = message.guild.channels.cache.get(channelId);
                 if (channel) {
-                    channel.setName('OFFLINE :red_circle:').then(() => {
+                    channel.setName('OFFLINE 🔴').then(() => {
                         process.exit();
                     }).catch(err => {
                         const errorEmbed = new EmbedBuilder()
