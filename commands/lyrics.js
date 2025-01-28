@@ -18,7 +18,7 @@ module.exports = {
             return message.reply('Please provide the artist and song name in the format "artist - song".');
         }
 
-        const fetchLyrics = (url, swap = false) => {
+        const fetchLyrics = (url, originalArtist, originalSong, swap = false) => {
             https.get(url, (res) => {
                 let data = '';
 
@@ -30,7 +30,7 @@ module.exports = {
                     if (res.statusCode === 404 && !swap) {
                         // Try swapping artist and song
                         const swappedUrl = `https://api.lyrics.ovh/v1/${encodeURIComponent(song)}/${encodeURIComponent(artist)}`;
-                        return fetchLyrics(swappedUrl, true);
+                        return fetchLyrics(swappedUrl, originalArtist, originalSong, true);
                     }
 
                     if (res.statusCode === 404) {
@@ -43,7 +43,7 @@ module.exports = {
 
                         const embed = new EmbedBuilder()
                             .setColor('#141414')
-                            .setTitle(`Lyrics for ${song} by ${artist}`)
+                            .setTitle(`Lyrics for ${originalSong} by ${originalArtist}`)
                             .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
                             .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
                             .setTimestamp();
@@ -61,6 +61,6 @@ module.exports = {
         };
 
         const url = `https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`;
-        fetchLyrics(url);
+        fetchLyrics(url, artist, song);
     },
 };
