@@ -24,7 +24,7 @@ module.exports = {
         });
 
         const embed = {
-            color: 0x141414, // Use an integer value for color
+            color: 0x1e1e1e, // Use a valid integer value for color
             title: 'Ticket Created',
             description: 'Please describe your issue in detail. A staff member will be with you shortly.',
             timestamp: new Date(),
