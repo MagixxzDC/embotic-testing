@@ -4,10 +4,15 @@ module.exports = {
     name: 'help',
     description: 'Lists all available commands.',
     async execute(message, args) {
-        const commands = message.client.commands.filter(command => !command.aliases).map(command => ({
-            name: command.name.length > 256 ? command.name.slice(0, 253) + '...' : command.name,
-            value: (command.description || 'No description available.').length > 1024 ? (command.description || 'No description available.').slice(0, 1021) + '...' : (command.description || 'No description available.')
-        }));
+        const commands = message.client.commands.reduce((uniqueCommands, command) => {
+            if (!uniqueCommands.some(cmd => cmd.name === command.name)) {
+                uniqueCommands.push({
+                    name: command.name.length > 256 ? command.name.slice(0, 253) + '...' : command.name,
+                    value: (command.description || 'No description available.').length > 1024 ? (command.description || 'No description available.').slice(0, 1021) + '...' : (command.description || 'No description available.')
+                });
+            }
+            return uniqueCommands;
+        }, []);
 
         const fields = [];
         let totalLength = 0;
