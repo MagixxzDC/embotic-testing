@@ -25,7 +25,7 @@ module.exports = {
 
         const helpEmbed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('Help <:util:809196048270491669>')
+            .setTitle('Help <:util:1333637185869713489>')
             .setDescription('Here are all the available commands:')
             .addFields(fields)
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
