@@ -16,7 +16,7 @@ module.exports = {
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('Shutdown')
+            .setTitle('Shutdown :skull:')
             .setDescription('Shutting down...');
         message.channel.send({ embeds: [embed] }).then(sentMessage => {
             setTimeout(() => {
