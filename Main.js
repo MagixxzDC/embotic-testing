@@ -31,7 +31,7 @@ client.once('ready', async () => {
                 await channel.setName(newChannelName);
                 console.log(`Channel name changed to ${newChannelName}`);
             } else {
-                console.log('Channel not found or is not a text channel.');
+                console.log('Channel not found or is not a voice channel.');
             }
         } catch (error) {
             console.error('Error changing channel name:', error);
@@ -42,9 +42,9 @@ client.once('ready', async () => {
         const onlineChannel = await client.channels.fetch(onlineChannelId);
         if (onlineChannel && onlineChannel.isVoiceBased()) {
             await onlineChannel.setName('Online 🟢');
-            console.log('Online channel name changed to Online :green_circle:');
+            console.log('Online channel name changed to Online 🟢');
         } else {
-            console.log('Online channel not found or is not a text channel.');
+            console.log('Online channel not found or is not a voice channel.');
         }
     } catch (error) {
         console.error('Error changing online channel name:', error);
