@@ -41,7 +41,7 @@ client.once('ready', async () => {
     try {
         const onlineChannel = await client.channels.fetch(onlineChannelId);
         if (onlineChannel && onlineChannel.isVoiceBased()) {
-            await onlineChannel.setName('Online :green_circle:');
+            await onlineChannel.setName('Online 🟢');
             console.log('Online channel name changed to Online :green_circle:');
         } else {
             console.log('Online channel not found or is not a text channel.');
