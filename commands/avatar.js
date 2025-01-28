@@ -2,6 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'avatar',
+    aliases: ['av', 'pfp', 'a'],
     description: 'Displays the avatar of the mentioned user or the command user.',
     execute(message, args) {
         let user = message.mentions.users.first() || message.author;
