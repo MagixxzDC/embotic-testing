@@ -1,4 +1,4 @@
-const { PermissionsBitField } = require('discord.js');
+const { PermissionsBitField, ChannelType } = require('discord.js');
 
 module.exports = {
     name: 'report',
@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
         const ticketChannel = await message.guild.channels.create({
             name: `ticket-${message.author.username}`, // Ensure the name field is set
-            type: 'GUILD_TEXT',
+            type: ChannelType.GuildText, // Use the correct constant for channel type
             permissionOverwrites: [
                 {
                     id: message.guild.id,
