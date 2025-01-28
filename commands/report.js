@@ -1,3 +1,5 @@
+const { PermissionsBitField } = require('discord.js');
+
 module.exports = {
     name: 'report',
     description: 'Create a ticket for reporting issues',
@@ -8,15 +10,15 @@ module.exports = {
             permissionOverwrites: [
                 {
                     id: message.guild.id,
-                    deny: ['VIEW_CHANNEL'],
+                    deny: [PermissionsBitField.Flags.ViewChannel],
                 },
                 {
                     id: message.author.id,
-                    allow: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY'],
+                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
                 },
                 {
                     id: message.guild.roles.everyone.id,
-                    deny: ['VIEW_CHANNEL'],
+                    deny: [PermissionsBitField.Flags.ViewChannel],
                 },
             ],
         });
