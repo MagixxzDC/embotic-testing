@@ -10,7 +10,7 @@ module.exports = {
             .setColor('#141414')
             .setTitle('Help :information_source:')
             .setDescription('Here are all the available commands:')
-            .addFields({ name: 'Commands', value: commands })
+            .addFields([{ name: 'Commands', value: commands }])
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
             .setTimestamp();
 
