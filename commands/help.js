@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'help',
-    description: 'Lists all available commands.',
+    description: 'Lists all available **commands**.',
     async execute(message, args) {
         const commands = message.client.commands.reduce((uniqueCommands, command) => {
             if (!uniqueCommands.some(cmd => cmd.name === command.name)) {
@@ -25,7 +25,7 @@ module.exports = {
 
         const helpEmbed = new EmbedBuilder()
             .setColor('#141414')
-            .setTitle('Help :information_source:')
+            .setTitle('Help <:util:809196048270491669>')
             .setDescription('Here are all the available commands:')
             .addFields(fields)
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
