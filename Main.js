@@ -21,6 +21,7 @@ client.once('ready', async () => {
     console.log('Bot is online!');
 
     const channelId = '838514683253620787';
+    const onlineChannelId = '814759943789215755';
 
     const updateChannelName = async () => {
         const newChannelName = moment().tz('America/New_York').format('🕒 | hh:mm:ss A');
@@ -36,10 +37,21 @@ client.once('ready', async () => {
             console.error('Error changing channel name:', error);
         }
     };
-    
+
+    try {
+        const onlineChannel = await client.channels.fetch(onlineChannelId);
+        if (onlineChannel && onlineChannel.isVoiceBased()) {
+            await onlineChannel.setName('Online :green_circle:');
+            console.log('Online channel name changed to Online :green_circle:');
+        } else {
+            console.log('Online channel not found or is not a text channel.');
+        }
+    } catch (error) {
+        console.error('Error changing online channel name:', error);
+    }
+
     updateChannelName();
     setInterval(updateChannelName, 60000);  
-   
 });
 
 client.on('messageCreate', message => {
