@@ -1,11 +1,11 @@
-const { PermissionsBitField, MessageEmbed } = require('discord.js');
+const { PermissionsBitField, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'kick',
     description: 'Kick a user from the server',
     async execute(message, args) {
         if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0xff0000)
                 .setTitle('Permission Denied')
                 .setDescription('You do not have permission to use this command.')
@@ -16,7 +16,7 @@ module.exports = {
 
         const user = message.mentions.users.first();
         if (!user) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0xff0000)
                 .setTitle('User Not Mentioned')
                 .setDescription('You need to mention a user to kick.')
@@ -27,7 +27,7 @@ module.exports = {
 
         const member = message.guild.members.resolve(user);
         if (!member) {
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0xff0000)
                 .setTitle('User Not Found')
                 .setDescription('User not found.')
@@ -38,7 +38,7 @@ module.exports = {
 
         try {
             await member.kick();
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0x00ff00)
                 .setTitle('User Kicked')
                 .setDescription(`${user.tag} has been kicked.`)
@@ -47,7 +47,7 @@ module.exports = {
             message.reply({ embeds: [embed] });
         } catch (error) {
             console.error(error);
-            const embed = new MessageEmbed()
+            const embed = new EmbedBuilder()
                 .setColor(0xff0000)
                 .setTitle('Error')
                 .setDescription('There was an error trying to kick this user.')
