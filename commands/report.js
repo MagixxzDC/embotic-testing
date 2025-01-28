@@ -2,7 +2,7 @@ module.exports = {
     name: 'report',
     description: 'Create a ticket for reporting issues',
     async execute(message, args) {
-        const ticketChannel = await message.guild.channels.create(`ticket-${message.author.username}`, {
+        const ticketChannel = await message.guild.channels.create({
             name: `ticket-${message.author.username}`, // Ensure the name field is set
             type: 'GUILD_TEXT',
             permissionOverwrites: [
