@@ -15,7 +15,6 @@ for (const file of commandFiles) {
             client.commands.set(alias, command);
         });
     }
-    console.log(`Command loaded: ${command.name}`); // Debugging log
 }
 
 client.once('ready', async () => {
@@ -56,21 +55,17 @@ client.once('ready', async () => {
 });
 
 client.on('messageCreate', message => {
-    console.log(`Received message: ${message.content}`); // Global debugging log
     if (!message.content.startsWith('-') || message.author.bot) return;
 
     const args = message.content.slice(1).split(/ +/);
     const commandName = args.shift().toLowerCase();
 
-    console.log(`Command name: ${commandName}`); // Debugging log
     const command = client.commands.get(commandName);
 
     if (!command) {
-        console.log('Command not found'); // Debugging log
         return;
     }
 
-    console.log(`Executing command: ${commandName}`); // Debugging log
     try {
         command.execute(message, args);
     } catch (error) {
