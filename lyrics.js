@@ -3,6 +3,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'lyrics',
+    aliases:['ly', 'song', 'lyric', 'l'],
     description: 'Fetch the lyrics of a song',
     async execute(message, args) {
         const song = args.join(' ');
