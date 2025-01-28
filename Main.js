@@ -51,7 +51,7 @@ client.once('ready', async () => {
     }
 
     updateChannelName();
-    setInterval(updateChannelName, 60000);  
+    setInterval(updateChannelName, 1200000);  
 });
 
 client.on('messageCreate', message => {
