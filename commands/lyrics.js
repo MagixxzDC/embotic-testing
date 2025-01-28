@@ -15,7 +15,14 @@ module.exports = {
         const song = songParts.join(' ');
 
         if (!artist || !song) {
-            return message.reply('Please provide the artist and song name in the format "artist - song".');
+            const embed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Invalid Format')
+                .setDescription('Please provide the artist and song name in the format "artist - song" or "song - artist".')
+                .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
+                .setTimestamp();
+
+            return message.channel.send({ embeds: [embed] });
         }
 
         const fetchLyrics = (url, originalArtist, originalSong, swap = false) => {
