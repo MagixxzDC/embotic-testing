@@ -9,7 +9,6 @@ module.exports = {
             value: (command.description || 'No description available.').length > 1024 ? (command.description || 'No description available.').slice(0, 1021) + '...' : (command.description || 'No description available.')
         }));
 
-        
         const fields = [];
         let totalLength = 0;
         for (const command of commands) {
@@ -20,10 +19,10 @@ module.exports = {
         }
 
         const helpEmbed = new EmbedBuilder()
-            .setColor('#141414')
+            .setColor(0x141414) // Use a valid integer value for color
             .setTitle('Help :information_source:')
             .setDescription('Here are all the available commands:')
-            .addFields(fields)
+            .addFields(fields.slice(0, 25)) // Ensure no more than 25 fields are added
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
             .setTimestamp();
 
