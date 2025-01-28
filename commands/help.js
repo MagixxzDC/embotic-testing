@@ -5,8 +5,8 @@ module.exports = {
     description: 'Lists all available commands.',
     async execute(message, args) {
         const commands = message.client.commands.map(command => ({
-            name: command.name,
-            value: command.description || 'No description available.'
+            name: command.name.length > 256 ? command.name.slice(0, 253) + '...' : command.name,
+            value: (command.description || 'No description available.').length > 1024 ? (command.description || 'No description available.').slice(0, 1021) + '...' : (command.description || 'No description available.')
         }));
 
         const helpEmbed = new EmbedBuilder()
