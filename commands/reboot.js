@@ -23,6 +23,8 @@ module.exports = {
             const onlineChannel = await message.client.channels.fetch(onlineChannelId);
             if (onlineChannel && onlineChannel.isVoiceBased()) {
                 await onlineChannel.setName('Online 🟢');
+                await onlineChannel.setName('Online 🟢');
+                await onlineChannel.setName('Online 🟢');
                 console.log('Online channel name changed to Online 🟢');
             } else {
                 console.log('Online channel not found or is not a text channel.');
