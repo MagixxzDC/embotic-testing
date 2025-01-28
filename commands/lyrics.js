@@ -19,7 +19,7 @@ module.exports = {
                 .setColor('#141414')
                 .setTitle('Invalid Format')
                 .setDescription('Please provide the artist and song name in the format "artist - song" or "song - artist".')
-                .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
+                .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() }) // Use bot's avatar
                 .setTimestamp();
 
             return message.channel.send({ embeds: [embed] });
@@ -52,7 +52,7 @@ module.exports = {
                             .setColor('#141414')
                             .setTitle(`Lyrics for ${originalSong} by ${originalArtist}`)
                             .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
-                            .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
+                            .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() }) // Use bot's avatar
                             .setTimestamp();
 
                         message.channel.send({ embeds: [embed] });
