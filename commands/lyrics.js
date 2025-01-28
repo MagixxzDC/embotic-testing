@@ -6,12 +6,19 @@ module.exports = {
     aliases: ['ly', 'song', 'lyric', 'l'],
     description: 'Fetch the lyrics of a song',
     async execute(message, args) {
-        const song = args.join(' ');
-        if (!song) {
+        const input = args.join(' ');
+        if (!input) {
             return message.reply('Please provide a song name.');
         }
 
-        const url = `https://api.lyrics.ovh/v1/${encodeURIComponent(song)}`;
+        const [artist, ...songParts] = input.split(' - ');
+        const song = songParts.join(' ');
+
+        if (!artist || !song) {
+            return message.reply('Please provide the artist and song name in the format "artist - song".');
+        }
+
+        const url = `https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`;
 
         https.get(url, (res) => {
             let data = '';
@@ -31,7 +38,7 @@ module.exports = {
 
                     const embed = new EmbedBuilder()
                         .setColor('#141414')
-                        .setTitle(`Lyrics for ${song}`)
+                        .setTitle(`Lyrics for ${song} by ${artist}`)
                         .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
                         .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
                         .setTimestamp();
