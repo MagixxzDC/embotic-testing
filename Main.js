@@ -55,6 +55,7 @@ client.once('ready', async () => {
 });
 
 client.on('messageCreate', message => {
+    console.log(`Received message: ${message.content}`); // Global debugging log
     if (!message.content.startsWith('-') || message.author.bot) return;
 
     const args = message.content.slice(1).split(/ +/);
