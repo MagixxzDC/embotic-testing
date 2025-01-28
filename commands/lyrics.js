@@ -18,40 +18,49 @@ module.exports = {
             return message.reply('Please provide the artist and song name in the format "artist - song".');
         }
 
+        const fetchLyrics = (url, swap = false) => {
+            https.get(url, (res) => {
+                let data = '';
+
+                res.on('data', (chunk) => {
+                    data += chunk;
+                });
+
+                res.on('end', () => {
+                    if (res.statusCode === 404 && !swap) {
+                        // Try swapping artist and song
+                        const swappedUrl = `https://api.lyrics.ovh/v1/${encodeURIComponent(song)}/${encodeURIComponent(artist)}`;
+                        return fetchLyrics(swappedUrl, true);
+                    }
+
+                    if (res.statusCode === 404) {
+                        return message.channel.send('Lyrics not found for the specified song.');
+                    }
+
+                    try {
+                        const response = JSON.parse(data);
+                        const lyrics = response.lyrics;
+
+                        const embed = new EmbedBuilder()
+                            .setColor('#141414')
+                            .setTitle(`Lyrics for ${song} by ${artist}`)
+                            .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
+                            .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
+                            .setTimestamp();
+
+                        message.channel.send({ embeds: [embed] });
+                    } catch (error) {
+                        console.error('Error parsing lyrics:', error);
+                        message.channel.send('There was an error fetching the lyrics.');
+                    }
+                });
+            }).on('error', (error) => {
+                console.error('Error fetching lyrics:', error);
+                message.channel.send('There was an error fetching the lyrics.');
+            });
+        };
+
         const url = `https://api.lyrics.ovh/v1/${encodeURIComponent(artist)}/${encodeURIComponent(song)}`;
-
-        https.get(url, (res) => {
-            let data = '';
-
-            res.on('data', (chunk) => {
-                data += chunk;
-            });
-
-            res.on('end', () => {
-                if (res.statusCode === 404) {
-                    return message.channel.send('Lyrics not found for the specified song.');
-                }
-
-                try {
-                    const response = JSON.parse(data);
-                    const lyrics = response.lyrics;
-
-                    const embed = new EmbedBuilder()
-                        .setColor('#141414')
-                        .setTitle(`Lyrics for ${song} by ${artist}`)
-                        .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
-                        .setFooter({ text: 'Embotic', iconURL: 'https://example.com/icon.png' }) // Adjust iconURL as needed
-                        .setTimestamp();
-
-                    message.channel.send({ embeds: [embed] });
-                } catch (error) {
-                    console.error('Error parsing lyrics:', error);
-                    message.channel.send('There was an error fetching the lyrics.');
-                }
-            });
-        }).on('error', (error) => {
-            console.error('Error fetching lyrics:', error);
-            message.channel.send('There was an error fetching the lyrics.');
-        });
+        fetchLyrics(url);
     },
 };
