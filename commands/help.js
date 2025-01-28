@@ -9,12 +9,12 @@ module.exports = {
             value: (command.description || 'No description available.').length > 1024 ? (command.description || 'No description available.').slice(0, 1021) + '...' : (command.description || 'No description available.')
         }));
 
-        // Ensure the total length of the fields does not exceed the maximum allowed length
+        
         const fields = [];
         let totalLength = 0;
         for (const command of commands) {
             const fieldLength = command.name.length + command.value.length;
-            if (totalLength + fieldLength > 6000) break; // Discord's total embed length limit is 6000 characters
+            if (totalLength + fieldLength > 6000) break; 
             fields.push(command);
             totalLength += fieldLength;
         }
