@@ -18,6 +18,7 @@ module.exports = {
         }
 
         const userWarnings = warnings[target.id] || [];
+        console.log(`Warnings for ${target.tag}:`, userWarnings); // Debugging line
 
         const embed = new EmbedBuilder()
             .setColor('#141414')

@@ -26,6 +26,7 @@ module.exports = {
         }
 
         warnings[target.id].push({ reason, date: new Date() });
+        console.log(`Warning added for ${target.tag}:`, warnings[target.id]); // Debugging line
 
         fs.writeFileSync('./warnings.json', JSON.stringify(warnings, null, 2));
 
