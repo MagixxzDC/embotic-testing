@@ -46,10 +46,10 @@ module.exports = {
                 .setColor('#141414')
                 .setTitle(`User Warned in ${message.channel.name}`)
                 .addFields(
-                    { name: 'User', value: `<@${target.id}>` },
-                    { name: 'Reason', value: reason },
-                    { name: 'Moderator', value: `<@${message.author.id}>` },
-                    { name: 'Channel', value: `<#${message.channel.id}>` }
+                    { name: 'User:', value: `<@${target.id}>` },
+                    { name: 'Reason:', value: reason },
+                    { name: 'Moderator:', value: `<@${message.author.id}>` },
+                    { name: 'Channel:', value: `<#${message.channel.id}>` }
                 )
                 .setTimestamp();
             await logChannel.send({ embeds: [logEmbed] });
