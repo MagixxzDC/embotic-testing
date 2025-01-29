@@ -32,7 +32,7 @@ module.exports = {
                     secondChannel.setName('🕒 | Offline')
                 ]).then(() => {
                     console.log('Channels renamed successfully. Shutting down.');
-                    process.exit(0);
+                    setTimeout(() => process.exit(0), 1000); // Forcefully terminate the process after 1 second
                 }).catch(err => {
                     if (err.code === 50013) { // Missing Permissions
                         console.error('Missing permissions to rename the channels.');
@@ -48,7 +48,7 @@ module.exports = {
                         .setTitle('Error')
                         .setDescription(`Failed to rename the channels: ${err.message}`);
                     message.channel.send({ embeds: [errorEmbed] }).then(() => {
-                        process.exit(1);
+                        setTimeout(() => process.exit(1), 1000); // Forcefully terminate the process after 1 second
                     });
                 });
             } else {
@@ -58,7 +58,7 @@ module.exports = {
                     .setTitle('Error')
                     .setDescription('One or both channels not found');
                 message.channel.send({ embeds: [errorEmbed] }).then(() => {
-                    process.exit(1);
+                    setTimeout(() => process.exit(1), 1000); // Forcefully terminate the process after 1 second
                 });
             }
         }, 2000);
