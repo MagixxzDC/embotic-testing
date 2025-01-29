@@ -19,7 +19,7 @@ module.exports = {
                 .setColor('#141414')
                 .setTitle('Invalid Format')
                 .setDescription('Please provide the artist and song name in the format "artist - song" or "song - artist".')
-                .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() }) // Use bot's avatar
+                .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() })
                 .setTimestamp();
 
             return message.channel.send({ embeds: [embed] });
@@ -35,7 +35,6 @@ module.exports = {
 
                 res.on('end', () => {
                     if (res.statusCode === 404 && !swap) {
-                        // Try swapping artist and song
                         const swappedUrl = `https://api.lyrics.ovh/v1/${encodeURIComponent(song)}/${encodeURIComponent(artist)}`;
                         return fetchLyrics(swappedUrl, originalArtist, originalSong, true);
                     }
@@ -52,7 +51,7 @@ module.exports = {
                             .setColor('#141414')
                             .setTitle(`Lyrics :microphone2:`)
                             .setDescription(lyrics.length > 2048 ? `${lyrics.slice(0, 2045)}...` : lyrics)
-                            .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() }) // Use bot's avatar
+                            .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() })
                             .setTimestamp();
 
                         message.channel.send({ embeds: [embed] });

@@ -26,7 +26,7 @@ module.exports = {
 
         try {
             const fetched = await message.channel.messages.fetch({ limit: amount });
-            const filtered = fetched.filter(msg => (Date.now() - msg.createdTimestamp) < 14 * 24 * 60 * 60 * 1000); // Filter messages < 14 days old
+            const filtered = fetched.filter(msg => (Date.now() - msg.createdTimestamp) < 14 * 24 * 60 * 60 * 1000);
             await message.channel.bulkDelete(filtered);
 
             const embed = new EmbedBuilder()

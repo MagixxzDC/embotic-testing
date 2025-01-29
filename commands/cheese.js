@@ -32,7 +32,6 @@ module.exports = {
             message.channel.send(':cheese:').catch(console.error);
         }, 3000);
 
-        // Stop the interval after 20 minutes to prevent spamming
         setTimeout(() => {
             if (message.client.cheeseInterval) {
                 clearInterval(message.client.cheeseInterval);
