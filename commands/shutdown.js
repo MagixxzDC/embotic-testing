@@ -19,47 +19,40 @@ module.exports = {
 
         console.log('Authorized user. Proceeding with shutdown.');
 
-        message.delete(); 
+        message.delete();
 
-        const embed = new EmbedBuilder()
-            .setColor('#141414')
-            .setTitle('Shutdown :skull:')
-            .setDescription('Shutting down...');
-        message.channel.send({ embeds: [embed] }).then(sentMessage => {
-            setTimeout(() => {
-                sentMessage.delete();
-                const channel = message.guild.channels.cache.get(channelId);
-                const secondChannel = message.guild.channels.cache.get(secondChannelId); // Get the second channel
-                
-                if (channel && secondChannel) {
-                    console.log('Both channels found. Renaming channels.');
-                    Promise.all([
-                        channel.setName('Offline 🔴'),
-                        secondChannel.setName('🕒 | Offline')
-                    ]).then(() => {
-                        console.log('Channels renamed successfully. Shutting down.');
-                        process.exit();
-                    }).catch(err => {
-                        console.error(`Failed to rename the channels: ${err.message}`);
-                        const errorEmbed = new EmbedBuilder()
-                            .setColor('#141414')
-                            .setTitle('Error')
-                            .setDescription(`Failed to rename the channels: ${err.message}`);
-                        message.channel.send({ embeds: [errorEmbed] }).then(() => {
-                            process.exit();
-                        });
-                    });
-                } else {
-                    console.error('One or both channels not found.');
+        setTimeout(() => {
+            const channel = message.guild.channels.cache.get(channelId);
+            const secondChannel = message.guild.channels.cache.get(secondChannelId); // Get the second channel
+            
+            if (channel && secondChannel) {
+                console.log('Both channels found. Renaming channels.');
+                Promise.all([
+                    channel.setName('Offline 🔴'),
+                    secondChannel.setName('🕒 | Offline')
+                ]).then(() => {
+                    console.log('Channels renamed successfully. Shutting down.');
+                    process.exit();
+                }).catch(err => {
+                    console.error(`Failed to rename the channels: ${err.message}`);
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#141414')
                         .setTitle('Error')
-                        .setDescription('One or both channels not found');
+                        .setDescription(`Failed to rename the channels: ${err.message}`);
                     message.channel.send({ embeds: [errorEmbed] }).then(() => {
                         process.exit();
                     });
-                }
-            }, 2000);
-        });
+                });
+            } else {
+                console.error('One or both channels not found.');
+                const errorEmbed = new EmbedBuilder()
+                    .setColor('#141414')
+                    .setTitle('Error')
+                    .setDescription('One or both channels not found');
+                message.channel.send({ embeds: [errorEmbed] }).then(() => {
+                    process.exit();
+                });
+            }
+        }, 2000);
     }
 };
