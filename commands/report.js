@@ -5,7 +5,7 @@ module.exports = {
     description: 'Create a ticket for reporting issues',
     async execute(message, args) {
         if (message.channel.name !== 'reports') {
-            return message.reply('This command can only be used in the #reports channel.').then(msg => {
+            return message.reply('This command can only be used in the <#' + message.guild.channels.cache.find(channel => channel.name === 'reports').id + '> channel.').then(msg => {
                 setTimeout(() => msg.delete().catch(console.error), 3000);
             });
         }
