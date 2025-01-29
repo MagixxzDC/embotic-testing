@@ -1,6 +1,7 @@
 const { EmbedBuilder } = require('discord.js');
 const warnings = require('../warnings.json'); // Assuming warnings are stored in a JSON file
 const fs = require('fs');
+const path = require('path');
 
 module.exports = {
     name: 'warn',
@@ -29,7 +30,8 @@ module.exports = {
         warnings[target.id].push({ reason, date: new Date() });
         console.log(`Warning added for ${target.tag}:`, warnings[target.id]); // Debugging line
 
-        fs.writeFileSync('./warnings.json', JSON.stringify(warnings, null, 2));
+        const warningsPath = path.join(__dirname, '../warnings.json');
+        fs.writeFileSync(warningsPath, JSON.stringify(warnings, null, 2));
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
