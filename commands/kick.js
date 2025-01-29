@@ -52,7 +52,7 @@ module.exports = {
                 console.error(error);
             }
             const embed = new EmbedBuilder()
-                .setColor('#8B0000')
+                .setColor('#141414')
                 .setTitle('Error :exclamation:')
                 .setDescription('There was an error trying to kick this user. You may not have the required permissions to kick them.')
                 .setTimestamp()
