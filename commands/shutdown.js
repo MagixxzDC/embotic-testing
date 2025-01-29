@@ -17,6 +17,8 @@ module.exports = {
             return message.channel.send({ embeds: [embed] });
         }
 
+        message.delete(); 
+
         const embed = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Shutdown :skull:')
