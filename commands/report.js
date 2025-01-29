@@ -4,6 +4,12 @@ module.exports = {
     name: 'report',
     description: 'Create a ticket for reporting issues',
     async execute(message, args) {
+        if (message.channel.name !== 'reports') {
+            return message.reply('This command can only be used in the #reports channel.').then(msg => {
+                setTimeout(() => msg.delete().catch(console.error), 3000);
+            });
+        }
+
         const ticketChannel = await message.guild.channels.create({
             name: `ticket-${message.author.username}`, // Ensure the name field is set
             type: ChannelType.GuildText, // Use the correct constant for channel type

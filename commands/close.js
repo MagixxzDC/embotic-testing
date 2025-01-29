@@ -4,6 +4,7 @@ const path = require('path');
 
 module.exports = {
     name: 'close',
+    aliases: ['end', 'finish', 'archive', 'transcript', 'save', 'exit'],
     description: 'Close the ticket and save a transcript',
     async execute(message, args) {
         if (!message.member.permissions.has(PermissionsBitField.Flags.ManageMessages)) {
@@ -23,7 +24,7 @@ module.exports = {
             if (transcriptChannel) {
                 await transcriptChannel.send({
                     files: [transcriptPath],
-                    content: `Transcript for ${message.channel.name}`,
+                    content: `Transcript for **#${message.channel.name}**`,
                 });
             }
 

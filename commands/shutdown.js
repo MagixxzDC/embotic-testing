@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'shutdown',
-    aliases: ['exit', 'quit', 'stop', 'kill', 'off', 'PowerOff'],
+    aliases: ['quit', 'stop', 'kill', 'off', 'PowerOff'],
     description: 'Shuts down the bot.',
     execute(message, args) {
         const authorizedUserId = '328248785933434881';
