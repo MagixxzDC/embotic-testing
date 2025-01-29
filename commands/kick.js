@@ -46,14 +46,18 @@ module.exports = {
                 .setFooter({ text: 'User has been successfully kicked.' });
             message.reply({ embeds: [embed] });
         } catch (error) {
-            console.error(error);
-            const embed = new EmbedBuilder()
-                .setColor(0xff0000)
-                .setTitle('Error')
-                .setDescription('There was an error trying to kick this user.')
-                .setTimestamp()
-                .setFooter({ text: 'Please try again later.' });
-            message.reply({ embeds: [embed] });
+            if (error.code === 50013) {
+                console.log('Ignoring MP Error.');
+            } else {
+                console.error(error);
+                const embed = new EmbedBuilder()
+                    .setColor(0xff0000)
+                    .setTitle('Error')
+                    .setDescription('There was an error trying to kick this user.')
+                    .setTimestamp()
+                    .setFooter({ text: 'Please try again later.' });
+                message.reply({ embeds: [embed] });
+            }
         }
     },
 };
