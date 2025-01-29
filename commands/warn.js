@@ -27,7 +27,7 @@ module.exports = {
             warnings[target.id] = [];
         }
 
-        warnings[target.id].push({ reason, date: new Date() });
+        warnings[target.id].push({ reason, date: new Date(), channel: message.channel.id });
         console.log(`Warning added for ${target.tag}:`, warnings[target.id]); // Debugging line
 
         const warningsPath = path.join(__dirname, '../warnings.json');
@@ -46,9 +46,10 @@ module.exports = {
                 .setColor('#141414')
                 .setTitle('User Warned')
                 .addFields(
-                    { name: 'User', value: `${target.tag} (${target.id})` },
+                    { name: 'User', value: `<@${target.id}>` },
                     { name: 'Reason', value: reason },
-                    { name: 'Moderator', value: `${message.author.tag} (${message.author.id})` }
+                    { name: 'Moderator', value: `<@${message.author.id}>` },
+                    { name: 'Channel', value: `<#${message.channel.id}>` }
                 )
                 .setTimestamp();
             await logChannel.send({ embeds: [logEmbed] });
