@@ -27,34 +27,17 @@ module.exports = {
                 const channel = message.guild.channels.cache.get(channelId);
                 const secondChannel = message.guild.channels.cache.get(secondChannelId); // Get the second channel
                 
-                if (channel) {
-                    channel.setName('Offline 🔴').then(() => {
-                        if (secondChannel) {
-                            secondChannel.setName('🕒 | Offline').then(() => {
-                                process.exit();
-                            }).catch(err => {
-                                const errorEmbed = new EmbedBuilder()
-                                    .setColor('#141414')
-                                    .setTitle('Error')
-                                    .setDescription(`Failed to rename the second channel: ${err.message}`);
-                                message.channel.send({ embeds: [errorEmbed] }).then(() => {
-                                    process.exit();
-                                });
-                            });
-                        } else {
-                            const errorEmbed = new EmbedBuilder()
-                                .setColor('#141414')
-                                .setTitle('Error')
-                                .setDescription('Second channel not found');
-                            message.channel.send({ embeds: [errorEmbed] }).then(() => {
-                                process.exit();
-                            });
-                        }
+                if (channel && secondChannel) {
+                    Promise.all([
+                        channel.setName('Offline 🔴'),
+                        secondChannel.setName('🕒 | Offline')
+                    ]).then(() => {
+                        process.exit();
                     }).catch(err => {
                         const errorEmbed = new EmbedBuilder()
                             .setColor('#141414')
                             .setTitle('Error')
-                            .setDescription(`Failed to rename the channel: ${err.message}`);
+                            .setDescription(`Failed to rename the channels: ${err.message}`);
                         message.channel.send({ embeds: [errorEmbed] }).then(() => {
                             process.exit();
                         });
@@ -63,7 +46,7 @@ module.exports = {
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#141414')
                         .setTitle('Error')
-                        .setDescription('Channel not found');
+                        .setDescription('One or both channels not found');
                     message.channel.send({ embeds: [errorEmbed] }).then(() => {
                         process.exit();
                     });
