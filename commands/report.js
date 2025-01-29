@@ -38,6 +38,31 @@ module.exports = {
         };
 
         await ticketChannel.send({ embeds: [embed] });
-        await message.reply(`Your ticket has been created: ${ticketChannel}`);
+        const responseMessage = await message.reply(`Your ticket has been created: ${ticketChannel}`);
+
+        // Delete the user's message and response message after 3 seconds
+        setTimeout(() => {
+            message.delete().catch(console.error);
+            responseMessage.delete().catch(console.error);
+        }, 3000);
+
+        // Send an embed to #logs
+        const logChannel = message.guild.channels.cache.find(channel => channel.name === 'logs');
+        if (logChannel) {
+            const logEmbed = {
+                color: 0x1e1e1e,
+                title: 'New Ticket Created',
+                description: `A new ticket has been created by ${message.author.tag} in ${ticketChannel}.`,
+                timestamp: new Date(),
+                footer: {
+                    text: 'Embotic Ticket System',
+                },
+                author: {
+                    name: message.author.tag,
+                    icon_url: message.author.displayAvatarURL({ dynamic: true }),
+                },
+            };
+            await logChannel.send({ embeds: [logEmbed] });
+        }
     },
 };
