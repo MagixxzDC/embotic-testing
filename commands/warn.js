@@ -38,6 +38,22 @@ module.exports = {
             .addFields({ name: 'Reason', value: reason })
             .setTimestamp();
 
+        const logChannel = message.guild.channels.cache.find(channel => channel.name === 'logs');
+        if (logChannel) {
+            const logEmbed = new EmbedBuilder()
+                .setColor('#ff0000')
+                .setTitle('User Warned')
+                .addFields(
+                    { name: 'User', value: `${target.tag} (${target.id})` },
+                    { name: 'Reason', value: reason },
+                    { name: 'Moderator', value: `${message.author.tag} (${message.author.id})` }
+                )
+                .setTimestamp();
+            await logChannel.send({ embeds: [logEmbed] });
+        } else {
+            console.log('Log channel not found.');
+        }
+
         await message.channel.send({ embeds: [embed] });
     },
 };
