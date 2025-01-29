@@ -5,6 +5,15 @@ module.exports = {
     aliases: ['clear', 'clean', 'delete', 'd', 'p'],
     description: 'Deletes a specified number of messages from a channel.',
     async execute(message, args) {
+        // Check if the user has the required permissions
+        if (!message.member.permissions.has('MANAGE_MESSAGES')) {
+            const embed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Unauthorized')
+                .setDescription('You do not have permission to use this command.');
+            return message.channel.send({ embeds: [embed] });
+        }
+
         const amount = parseInt(args[0]);
 
         if (isNaN(amount) || amount < 1 || amount > 100) {
