@@ -44,7 +44,7 @@ module.exports = {
         if (logChannel) {
             const logEmbed = new EmbedBuilder()
                 .setColor('#141414')
-                .setTitle('User Warned')
+                .setTitle(`User Warned in ${message.channel.name}`)
                 .addFields(
                     { name: 'User', value: `<@${target.id}>` },
                     { name: 'Reason', value: reason },
