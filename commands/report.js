@@ -46,8 +46,8 @@ module.exports = {
             responseMessage.delete().catch(console.error);
         }, 3000);
 
-        // Send an embed to #logs
-        const logChannel = message.guild.channels.cache.find(channel => channel.name === 'logs');
+        // Send an embed to #open-tickets
+        const logChannel = message.guild.channels.cache.find(channel => channel.name === 'open-tickets');
         if (logChannel) {
             const logEmbed = {
                 color: 0x1e1e1e,
