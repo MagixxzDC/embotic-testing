@@ -17,6 +17,8 @@ module.exports = {
             return message.channel.send({ embeds: [embed] });
         }
 
+        console.log('Authorized user. Proceeding with shutdown.');
+
         message.delete(); 
 
         const embed = new EmbedBuilder()
@@ -30,12 +32,15 @@ module.exports = {
                 const secondChannel = message.guild.channels.cache.get(secondChannelId); // Get the second channel
                 
                 if (channel && secondChannel) {
+                    console.log('Both channels found. Renaming channels.');
                     Promise.all([
                         channel.setName('Offline 🔴'),
                         secondChannel.setName('🕒 | Offline')
                     ]).then(() => {
+                        console.log('Channels renamed successfully. Shutting down.');
                         process.exit();
                     }).catch(err => {
+                        console.error(`Failed to rename the channels: ${err.message}`);
                         const errorEmbed = new EmbedBuilder()
                             .setColor('#141414')
                             .setTitle('Error')
@@ -45,6 +50,7 @@ module.exports = {
                         });
                     });
                 } else {
+                    console.error('One or both channels not found.');
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#141414')
                         .setTitle('Error')
