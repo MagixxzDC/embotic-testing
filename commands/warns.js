@@ -1,5 +1,14 @@
 const { EmbedBuilder } = require('discord.js');
-const warnings = require('../warnings.json'); // Assuming warnings are stored in a JSON file
+const fs = require('fs');
+const path = require('path');
+
+let warnings;
+try {
+    warnings = require('../warnings.json'); // Assuming warnings are stored in a JSON file
+} catch (error) {
+    console.error('Error loading warnings.json:', error);
+    warnings = {};
+}
 
 module.exports = {
     name: 'warns',
