@@ -6,7 +6,7 @@ module.exports = {
     async execute(message, args) {
         if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             const embed = new EmbedBuilder()
-                .setColor(0xff0000)
+                .setColor('#141414')
                 .setTitle('Permission Denied')
                 .setDescription('You do not have permission to use this command.')
                 .setTimestamp()
@@ -39,7 +39,7 @@ module.exports = {
         try {
             await member.kick();
             const embed = new EmbedBuilder()
-                .setColor(0x00ff00)
+                .setColor('#141414')
                 .setTitle('User Kicked')
                 .setDescription(`${user.tag} has been kicked.`)
                 .setTimestamp()
