@@ -5,7 +5,7 @@ const path = require('path');
 
 module.exports = {
     name: 'warn',
-    aliases: ['warning', 'addwarn', 'balls'],
+    aliases: ['warning', 'addwarn'],
     description: 'Warn a player',
     async execute(message, args) {
         const target = message.mentions.users.first();
