@@ -6,9 +6,9 @@ module.exports = {
     async execute(message, args) {
         if (message.channel.name !== 'reports') {
             message.reply('This command can only be used in the <#' + message.guild.channels.cache.find(channel => channel.name === 'reports').id + '> channel.').then(msg => {
-                setTimeout(() => msg.delete().catch(console.error), 3000);
+                setTimeout(() => msg.delete().catch(console.error), 5000);
             });
-            return setTimeout(() => message.delete().catch(console.error), 3000);
+            return setTimeout(() => message.delete().catch(console.error), 5000);
         }
 
         const ticketChannel = await message.guild.channels.create({
@@ -47,11 +47,11 @@ module.exports = {
         await ticketChannel.send({ embeds: [embed] });
         const responseMessage = await message.reply(`Your ticket has been created: ${ticketChannel}`);
 
-        // Delete the user's message and response message after 3 seconds
+        // Delete the user's message and response message after 5 seconds
         setTimeout(() => {
             message.delete().catch(console.error);
             responseMessage.delete().catch(console.error);
-        }, 3000);
+        }, 5000);
 
         // Send an embed to #open-tickets
         const logChannel = message.guild.channels.cache.find(channel => channel.name === 'open-tickets');
