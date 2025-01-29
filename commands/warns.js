@@ -9,6 +9,14 @@ module.exports = {
         .addUserOption(option => option.setName('target').setDescription('The player to check warnings for').setRequired(true)),
     async execute(interaction) {
         const target = interaction.options.getUser('target');
+        if (!target) {
+            const embed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Invalid User')
+                .setDescription('Please mention a valid user to check warnings for.');
+            return interaction.reply({ embeds: [embed], ephemeral: true });
+        }
+
         const userWarnings = warnings[target.id] || [];
 
         const embed = new EmbedBuilder()
