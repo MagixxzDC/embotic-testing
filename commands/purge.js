@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     name: 'purge',
-    aliases: ['clear', 'clean'],
+    aliases: ['clear', 'clean', 'delete', 'd', 'p'],
     description: 'Deletes a specified number of messages from a channel.',
     async execute(message, args) {
         const amount = parseInt(args[0]);
