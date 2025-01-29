@@ -31,8 +31,10 @@ module.exports = {
         console.log(`Warning added for ${target.tag}:`, warnings[target.id]); // Debugging line
 
         const warningsPath = path.join(__dirname, '../warnings.json');
+        console.log('Writing to warnings.json at path:', warningsPath); // Debugging line
         try {
             fs.writeFileSync(warningsPath, JSON.stringify(warnings, null, 2));
+            console.log('Successfully wrote to warnings.json'); // Debugging line
         } catch (error) {
             console.error('Error writing to warnings.json:', error);
             return message.reply('There was an error saving the warning. Please try again later.');
