@@ -53,8 +53,8 @@ module.exports = {
             }
             const embed = new EmbedBuilder()
                 .setColor('#8B0000')
-                .setTitle('Error')
-                .setDescription('There was an error trying to kick this user. Their perms may be above yours or you may not have the required permissions to kick them.')
+                .setTitle('Error :exclamation:')
+                .setDescription('There was an error trying to kick this user. You may not have the required permissions to kick them.')
                 .setTimestamp()
                 .setFooter({ text: 'Please try again later.' });
             message.reply({ embeds: [embed] });
