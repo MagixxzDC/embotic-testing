@@ -47,12 +47,16 @@ module.exports = {
                 }
             }, 5000);
         } catch (error) {
-            console.error('Error purging messages:', error);
-            const embed = new EmbedBuilder()
-                .setColor('#141414')
-                .setTitle('Error')
-                .setDescription('There was an error trying to purge messages.');
-            message.channel.send({ embeds: [embed] });
+            if (error.code === 50034) {
+                console.warn('Some messages could not be deleted because they are older than 14 days.');
+            } else {
+                console.error('Error purging messages:', error);
+                const embed = new EmbedBuilder()
+                    .setColor('#141414')
+                    .setTitle('Error')
+                    .setDescription('There was an error trying to purge messages.');
+                message.channel.send({ embeds: [embed] });
+            }
         }
     },
 };
