@@ -34,7 +34,15 @@ module.exports = {
                     console.log('Channels renamed successfully. Shutting down.');
                     process.exit();
                 }).catch(err => {
-                    console.error(`Failed to rename the channels: ${err.message}`);
+                    if (err.code === 50013) { // Missing Permissions
+                        console.error('Missing permissions to rename the channels.');
+                    } else if (err.code === 50035) { // Invalid Form Body
+                        console.error('Invalid form body when renaming the channels.');
+                    } else if (err.code === 10003) { // Unknown Channel
+                        console.error('One or both channels not found.');
+                    } else {
+                        console.error(`Failed to rename the channels: ${err.message}`);
+                    }
                     const errorEmbed = new EmbedBuilder()
                         .setColor('#141414')
                         .setTitle('Error')
