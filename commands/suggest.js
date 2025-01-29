@@ -69,7 +69,7 @@ module.exports = {
             const replyMessage = await message.reply('Thank you for your suggestion!');
             
             setTimeout(() => message.delete().catch(console.error), 0);
-            setTimeout(() => replyMessage.delete().catch(console.error), 0);
+            setTimeout(() => replyMessage.delete().catch(console.error), 5000); // Changed to 5 seconds
         } catch (error) {
             console.error(error);
             const errorEmbed = new EmbedBuilder()
