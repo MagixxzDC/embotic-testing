@@ -41,7 +41,7 @@ module.exports = {
         const logChannel = message.guild.channels.cache.find(channel => channel.name === 'logs');
         if (logChannel) {
             const logEmbed = new EmbedBuilder()
-                .setColor('#ff0000')
+                .setColor('#141414')
                 .setTitle('User Warned')
                 .addFields(
                     { name: 'User', value: `${target.tag} (${target.id})` },
