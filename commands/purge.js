@@ -26,12 +26,13 @@ module.exports = {
 
         try {
             const fetched = await message.channel.messages.fetch({ limit: amount });
-            await message.channel.bulkDelete(fetched);
+            const filtered = fetched.filter(msg => (Date.now() - msg.createdTimestamp) < 14 * 24 * 60 * 60 * 1000); // Filter messages < 14 days old
+            await message.channel.bulkDelete(filtered);
 
             const embed = new EmbedBuilder()
                 .setColor('#141414')
                 .setTitle('Purge Successful')
-                .setDescription(`Successfully deleted ${fetched.size} messages.`)
+                .setDescription(`Successfully deleted ${filtered.size} messages.`)
                 .setFooter({ text: 'Embotic', iconURL: message.client.user.displayAvatarURL() })
                 .setTimestamp();
 
@@ -47,16 +48,12 @@ module.exports = {
                 }
             }, 5000);
         } catch (error) {
-            if (error.code === 50034) {
-                console.warn('Some messages could not be deleted because they are older than 14 days.');
-            } else {
-                console.error('Error purging messages:', error);
-                const embed = new EmbedBuilder()
-                    .setColor('#141414')
-                    .setTitle('Error')
-                    .setDescription('There was an error trying to purge messages.');
-                message.channel.send({ embeds: [embed] });
-            }
+            console.error('Error purging messages:', error);
+            const embed = new EmbedBuilder()
+                .setColor('#141414')
+                .setTitle('Error')
+                .setDescription('There was an error trying to purge messages.');
+            message.channel.send({ embeds: [embed] });
         }
     },
 };
