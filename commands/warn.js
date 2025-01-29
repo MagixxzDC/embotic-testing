@@ -1,24 +1,25 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
 const warnings = require('../warnings.json'); // Assuming warnings are stored in a JSON file
 const fs = require('fs');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('warn')
-        .setDescription('Warn a player')
-        .addUserOption(option => option.setName('target').setDescription('The player to warn').setRequired(true))
-        .addStringOption(option => option.setName('reason').setDescription('The reason for the warning').setRequired(true)),
-    async execute(interaction) {
-        const target = interaction.options.getUser('target');
-        const reason = interaction.options.getString('reason');
+    name: 'warn',
+    aliases: ['warning', 'addwarn', 'balls'],
+    description: 'Warn a player',
+    async execute(message, args) {
+        const target = message.mentions.users.first();
+        const reason = args.slice(1).join(' ');
 
-        if (!interaction.member.permissions.has('ADMINISTRATOR')) {
-            const embed = new EmbedBuilder()
-                .setColor('#141414')
-                .setTitle('Unauthorized')
-                .setDescription('You do not have permission to use this command.');
-            return interaction.reply({ embeds: [embed], ephemeral: true });
+        if (!message.member.permissions.has('ADMINISTRATOR')) {
+            return message.reply('You do not have permission to use this command.');
+        }
+
+        if (!target) {
+            return message.reply('Please mention a valid user to warn.');
+        }
+
+        if (!reason) {
+            return message.reply('Please provide a reason for the warning.');
         }
 
         if (!warnings[target.id]) {
@@ -37,6 +38,6 @@ module.exports = {
             .addFields({ name: 'Reason', value: reason })
             .setTimestamp();
 
-        await interaction.reply({ embeds: [embed] });
+        await message.channel.send({ embeds: [embed] });
     },
 };
