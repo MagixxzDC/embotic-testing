@@ -9,8 +9,14 @@ module.exports = {
         if (message.mentions.roles.size > 0) {
             let role = message.mentions.roles.first();
             users = role.members.map(member => member.user);
+        } else if (message.mentions.users.size > 0) {
+            users.push(message.mentions.users.first());
         } else {
-            users.push(message.mentions.users.first() || message.author);
+            users.push(message.author);
+        }
+
+        if (users.length === 0) {
+            return message.channel.send('No users found.');
         }
 
         users.forEach(user => {
