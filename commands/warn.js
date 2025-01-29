@@ -31,7 +31,12 @@ module.exports = {
         console.log(`Warning added for ${target.tag}:`, warnings[target.id]); // Debugging line
 
         const warningsPath = path.join(__dirname, '../warnings.json');
-        fs.writeFileSync(warningsPath, JSON.stringify(warnings, null, 2));
+        try {
+            fs.writeFileSync(warningsPath, JSON.stringify(warnings, null, 2));
+        } catch (error) {
+            console.error('Error writing to warnings.json:', error);
+            return message.reply('There was an error saving the warning. Please try again later.');
+        }
 
         const embed = new EmbedBuilder()
             .setColor('#141414')
