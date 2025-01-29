@@ -9,7 +9,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor('#141414')
             .setTitle('Ping')
-            .setDescription(`Pong! :ping_pong: | Latency: **${latency}ms.**`)
+            .setDescription(`:ping_pong: Pong! | Latency: **${latency}ms.**`)
             .setFooter({ text: 'Embotic', iconURL: message.guild.iconURL() })
             .setTimestamp();
 
